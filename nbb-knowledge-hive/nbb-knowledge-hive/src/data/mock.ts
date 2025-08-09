@@ -138,7 +138,7 @@ export const MOCK_DOCS: Doc[] = [
     department: "Legal",
     type: "Report",
     date: "2025-07-12",
-    tags: ["dashboard", "legal", "KPI", "SLA"],
+    tags: ["Dashboard", "Legal", "KPI", "SLA"],
     stakeholders: ["Legal"],
     accessLevel: "Public",
     content: "Open matters, cycle time per request class, retrieval time (current 22s; target 15s), and ageing buckets.",
