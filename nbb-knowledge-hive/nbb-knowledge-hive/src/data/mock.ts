@@ -184,7 +184,7 @@ export const MOCK_DOCS: Doc[] = [
     department: "Sustainability",
     type: "Report",
     date: "2025-07-25",
-    tags: ["ESG", "carbon", "paperless", "energy"],
+    tags: ["ESG", "Carbon", "Paperless", "Energy"],
     stakeholders: ["Sustainability", "Operations", "Facilities"],
     access: "Public",
     content:
@@ -199,7 +199,7 @@ export const MOCK_DOCS: Doc[] = [
     department: "Corporate Communications",
     type: "Memo",
     date: "2025-07-28",
-    tags: ["press", "PR", "brand", "social"],
+    tags: ["Press", "PR", "Brand", "Social"],
     stakeholders: ["Corporate Communications", "Legal", "Executive Office"],
     access: "Public",
     content:
