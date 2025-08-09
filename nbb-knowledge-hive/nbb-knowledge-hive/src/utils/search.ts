@@ -1,3 +1,5 @@
+export type Access = "Public" | "Restricted" | "Confidential";
+
 export type Doc = {
   id: string;
   title: string;
@@ -7,7 +9,9 @@ export type Doc = {
   date: string; // ISO
   tags: string[];
   stakeholders: string[];
-  accessLevel: "Public" | "Restricted" | "Confidential";
+  // Accept both shapes; we'll normalize at runtime
+  access?: Access;              // <— NEW (some of your docs use `access`)
+  accessLevel?: Access;         // existing
   content: string;
   relatedIds: string[];
 };
@@ -16,7 +20,7 @@ export type Query = {
   text: string;
   department?: string;
   type?: Doc["type"] | "Any";
-  access?: Doc["accessLevel"] | "Any";
+  access?: Access | "Any";
   from?: string; // ISO
   to?: string;   // ISO
   tags?: string[];
@@ -28,6 +32,10 @@ function normalize(s: string) {
 
 function contains(hay: string, needle: string) {
   return normalize(hay).includes(normalize(needle));
+}
+
+function getAccess(d: Doc): Access {
+  return (d.access ?? d.accessLevel ?? "Public");
 }
 
 /** Very small scoring: title>tags>summary>content */
@@ -49,14 +57,15 @@ export function filterDocs(docs: Doc[], query: Query): Doc[] {
   const { text, department, type, access, from, to, tags } = query;
   const fromTime = from ? new Date(from).getTime() : -Infinity;
   const toTime = to ? new Date(to).getTime() : Infinity;
+
   return docs
     .filter(d =>
       (!department || d.department === department) &&
       (!type || type === "Any" || d.type === type) &&
-      (!access || access === "Any" || d.accessLevel === access) &&
+      (!access || access === "Any" || getAccess(d) === access) &&
       (new Date(d.date).getTime() >= fromTime) &&
       (new Date(d.date).getTime() <= toTime) &&
-      (!tags || tags.every(t => d.tags.map(x=>x.toLowerCase()).includes(t.toLowerCase())))
+      (!tags || tags.every(t => d.tags.map(x => x.toLowerCase()).includes(t.toLowerCase())))
     )
     .map(d => ({ doc: d, s: score(d, text) }))
     .filter(x => x.s > 0 || !text.trim()) // if searching, require some match
