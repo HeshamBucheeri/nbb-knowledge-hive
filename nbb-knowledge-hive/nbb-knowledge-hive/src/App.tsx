@@ -3,6 +3,7 @@ import { MOCK_DOCS } from "./data/mock";
 import { filterDocs, type Query, type Doc } from "./utils/search";
 import DocumentCard from "./components/DocumentCard";
 import DetailDrawer from "./components/DetailDrawer";
+import Filters from "./components/Filters";
 
 export default function App() {
   const [query, setQuery] = React.useState<Query>({
@@ -114,10 +115,7 @@ export default function App() {
   );
 }
 
-function Filters(props: any) {
-  const Comp = require("./components/Filters").default;
-  return <Comp {...props} />;
-}
+
 
 function Footer() {
   return (
