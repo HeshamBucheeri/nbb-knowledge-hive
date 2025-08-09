@@ -29,8 +29,8 @@ export const MOCK_DOCS: Doc[] = [
   },
   {
     id: "H-003",
-    title: "Strategy Benchmarking: Filing Time Before/After Unnamed Drop-A-Step Project Implementation",
-    summary: "Filing time reduced and misfiling incidents decreased across pilot units.",
+    title: "Strategy Benchmarking For Drop-A-Step",
+    summary: "Benchmarking Drop-A-Step Implementation.",
     department: "Strategy",
     type: "Report",
     date: "2025-08-22",
@@ -69,7 +69,7 @@ export const MOCK_DOCS: Doc[] = [
   {
     id: "H-006",
     title: "Legal Handbook: House View On Electronic Signatures",
-    summary: "E-signatures as a valid form of approval",
+    summary: "E-signatures as a valid form of approval.",
     department: "Legal",
     type: "Report",
     date: "2023-09-05",
