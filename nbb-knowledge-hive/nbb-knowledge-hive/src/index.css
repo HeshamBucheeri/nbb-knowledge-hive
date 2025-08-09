@@ -2,12 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* General utilities */
-:root {
-  --brand: #c20e1a;
-}
-/* Focus ring for accessibility */
-* :focus-visible {
-  outline: 2px solid var(--brand);
-  outline-offset: 2px;
-}
+/* Accessibility focus */
+*:focus-visible { outline: 2px solid #C20E1A; outline-offset: 2px; }
+
+/* Page background & headings */
+body { @apply bg-nbb-sand text-gray-900; }
+h1, h2, h3 { @apply text-nbb-teal; }
