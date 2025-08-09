@@ -10,10 +10,12 @@ type Props = {
 };
 
 export default function DocumentCard({ doc, onOpen, onBookmark, isBookmarked }: Props) {
+  // Normalize access for display
+  const access = doc.access ?? doc.accessLevel ?? "Public";
   const badge =
-    doc.accessLevel === "Confidential"
+    access === "Confidential"
       ? "bg-red-50 text-red-700"
-      : doc.accessLevel === "Restricted"
+      : access === "Restricted"
       ? "bg-amber-50 text-amber-700"
       : "bg-emerald-50 text-emerald-700";
 
@@ -24,7 +26,7 @@ export default function DocumentCard({ doc, onOpen, onBookmark, isBookmarked }: 
     >
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-base font-semibold leading-6 text-nbb-teal">{doc.title}</h3>
-        <span className={`text-xs px-2 py-0.5 rounded-full shrink-0 ${badge}`}>{doc.accessLevel}</span>
+        <span className={`text-xs px-2 py-0.5 rounded-full shrink-0 ${badge}`}>{access}</span>
       </div>
 
       <p className="mt-2 text-sm text-gray-700">{doc.summary}</p>
@@ -32,7 +34,9 @@ export default function DocumentCard({ doc, onOpen, onBookmark, isBookmarked }: 
       <div className="mt-3 flex flex-wrap gap-2">
         <Tag label={doc.department} />
         <Tag label={doc.type} />
-        {doc.tags.slice(0, 4).map(t => <Tag key={t} label={t} />)}
+        {doc.tags.slice(0, 4).map((t) => (
+          <Tag key={t} label={t} />
+        ))}
       </div>
 
       <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
