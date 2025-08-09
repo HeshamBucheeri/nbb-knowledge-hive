@@ -3,15 +3,15 @@ import type { Doc } from "../utils/search";
 export const MOCK_DOCS: Doc[] = [
   {
     id: "H-001",
-    title: "Legal Playbook: Vendor Data Breach Response (2025)",
-    summary: "Step-by-step internal process for responding to third-party security incidents, with notice/cure timelines.",
+    title: "Legal Handbook: House View On Accepting POAs (2025)",
+    summary: "Step-by-step internal process for accepting POAs.",
     department: "Legal",
     type: "Precedent",
     date: "2025-06-15",
-    tags: ["legal", "vendor", "data breach", "incident response", "contract"],
-    stakeholders: ["Legal", "Procurement", "CISO Office"],
+    tags: ["legal", "POA", "retail", "house view", "contract"],
+    stakeholders: ["Legal", "Compliance", "Retail"],
     accessLevel: "Restricted",
-    content: "Template clauses for termination, audit rights, breach notifications, and indemnities. Includes internal escalation RACI and sample notice letters.",
+    content: "Template table for what to accept and not to accept when recieving a POA request.",
     relatedIds: ["H-007", "H-010"]
   },
   {
@@ -76,7 +76,7 @@ export const MOCK_DOCS: Doc[] = [
     tags: ["E-signature", "approval"],
     stakeholders: ["Legal"],
     accessLevel: "Public",
-    content: "The courts now recognize electronic sigantures as a valid form of approval. We will now recognize electronic signatures as an acceptable form of approval, provided that we highlight the associated risk of forgery to the relevant department whenever this advice is given",
+    content: "The courts now recognize electronic sigantures as a valid form of approval. We will now recognize electronic signatures as an acceptable form of approval, provided that we highlight the associated risk of forgery to the relevant department whenever this advice is given.",
     relatedIds: []
   },
   {
