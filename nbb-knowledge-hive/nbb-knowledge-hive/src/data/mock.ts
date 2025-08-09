@@ -53,7 +53,7 @@ export const MOCK_DOCS: Doc[] = [
     type: "Research",
     date: "2024-11-18",
     tags: ["Cybersecurity", "R&D", "Efficiency", "Hypothesis", "Triage"],
-    stakeholders: ["CISO Office", "SOC", "Infra"],
+    stakeholders: ["GCEO Office", "SOC", "Infra"],
     access: "Restricted",
     content:
       "Design an A/B pilot: prioritized ticket routing vs. FIFO. Measure queue depth, SLA breach rate, and analyst handoff time.",
@@ -97,7 +97,7 @@ export const MOCK_DOCS: Doc[] = [
     type: "Report",
     date: "2024-08-21",
     tags: ["Vendor", "Security", "ISO", "PCI", "Third-party"],
-    stakeholders: ["CISO Office", "Procurement", "Legal"],
+    stakeholders: ["GCEO Office", "Procurement", "Legal"],
     access: "Restricted",
     content:
       "CSPM evidence, SOC2/ISO recency, incident reporting SLAs, breach drill participation, and encryption at rest/in transit verification.",
@@ -126,7 +126,7 @@ export const MOCK_DOCS: Doc[] = [
     type: "Note",
     date: "2024-03-19",
     tags: ["Stakeholders", "RACI", "Transformation"],
-    stakeholders: ["CIO", "COO", "Strategy"],
+    stakeholders: ["GCTO", "COO", "Strategy"],
     access: "Public",
     content:
       "Keeps an up-to-date matrix for governance streams and escalation paths; aligns with program board cadence.",
