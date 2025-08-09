@@ -7,7 +7,7 @@ type Props = {
   allDocs: Doc[];
 };
 
-const departments = Array.from(new Set(["All","Legal","Strategy","Cybersecurity","Operations","IT"]));
+const departments = Array.from(new Set(["All","Legal","Strategy","Cybersecurity","Operations","IT","Sustainability","Corporate Communications","Compliance"]));
 const types: (Doc["type"] | "Any")[] = ["Any","Memo","Report","Research","Precedent","Dataset","Note"];
 const accessLevels: (Doc["accessLevel"] | "Any")[] = ["Any","Public","Restricted","Confidential"];
 
