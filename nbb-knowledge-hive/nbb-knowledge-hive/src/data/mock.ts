@@ -157,4 +157,30 @@ export const MOCK_DOCS: Doc[] = [
     content: "Use the top search for keywords; filter by department, type, access, date, or tags. Open a result to view details and related items; use ☆ to bookmark.",
     relatedIds: ["H-008"]
   }
+  {
+  id: "H-013",
+  title: "Sustainability Dashboard — ESG KPIs (Pilot)",
+  summary: "Quarterly snapshot of emissions, paperless adoption, and energy efficiency initiatives across branches.",
+  department: "Sustainability",
+  type: "Report",
+  date: "2025-07-25",
+  tags: ["ESG", "carbon", "paperless", "energy"],
+  stakeholders: ["Sustainability", "Operations", "Facilities"],
+  accessLevel: "Public",
+  content: "Tracks Scope 2 electricity usage, % e-statements vs. paper, and HVAC optimization progress. Notes next steps for vendor disclosures.",
+  relatedIds: ["H-003", "H-006"]
+},
+{
+  id: "H-014",
+  title: "Corporate Communications Guidance — External Announcements",
+  summary: "Approval workflow, tone-of-voice, and crisis comms checklist for public releases and social posts.",
+  department: "Corporate Communications",
+  type: "Memo",
+  date: "2025-07-28",
+  tags: ["press", "PR", "brand", "social"],
+  stakeholders: ["Corporate Communications", "Legal", "Executive Office"],
+  accessLevel: "Public",
+  content: "Defines drafting → review → approval steps, mandatory legal sign-off, and media inquiry handling. Includes template press release structure.",
+  relatedIds: ["H-002", "H-011"]
+},
 ];
