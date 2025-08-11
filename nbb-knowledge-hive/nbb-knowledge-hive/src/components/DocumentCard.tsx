@@ -12,7 +12,6 @@ type Props = {
 // Status-driven styling (card tint + badge)
 function getStatusStyles(statusRaw?: string) {
   const s = (statusRaw || "").toLowerCase();
-
   if (s.includes("replaced") || s.includes("cancelled") || s.includes("canceled")) {
     return {
       statusText: "Replaced / Cancelled",
@@ -39,17 +38,19 @@ export default function DocumentCard({
 
   return (
     <article
-      className={`rounded-2xl border p-5 shadow-card transition hover:-translate-y-[1px] hover:shadow-md ${cardClass}`}
+      className={`rounded-2xl border p-5 shadow-card transition hover:-translate-y-[1px] hover:shadow-md ${cardClass} overflow-hidden`}
       aria-label={doc.title}
     >
-      {/* Title + indicators */}
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="text-base font-semibold leading-6 text-nbb-teal">
+      {/* Header row */}
+      <div className="flex items-start justify-between gap-2">
+        {/* Title wraps but doesn't push the right side out */}
+        <h3 className="flex-1 min-w-0 text-base font-semibold leading-6 text-nbb-teal line-clamp-2 break-words">
           {doc.title}
         </h3>
 
-        <div className="flex items-center gap-2">
-          {/* Minimal attachment indicator (no count) */}
+        {/* Right-side indicators stay inside card */}
+        <div className="shrink-0 inline-flex items-center gap-2">
+          {/* Attachment paperclip (subtle) */}
           {hasAttachment && (
             <span
               className="inline-flex items-center justify-center rounded-full border border-gray-200 bg-white p-1"
@@ -76,8 +77,8 @@ export default function DocumentCard({
             </span>
           )}
 
-          {/* Status chip */}
-          <span className={`text-xs px-2 py-0.5 rounded-full shrink-0 ${badgeClass}`}>
+          {/* Status pill */}
+          <span className={`text-[11px] px-2 py-0.5 rounded-full ${badgeClass}`}>
             {statusText}
           </span>
         </div>
@@ -96,8 +97,7 @@ export default function DocumentCard({
         </span>
         <span className="hidden sm:inline text-gray-300">•</span>
         <span className="whitespace-nowrap">
-          <strong className="font-medium text-gray-700">Type:</strong>{" "}
-          {doc.type}
+          <strong className="font-medium text-gray-700">Type:</strong> {doc.type}
         </span>
         <span className="hidden sm:inline text-gray-300">•</span>
         <span className="whitespace-nowrap">
@@ -106,8 +106,7 @@ export default function DocumentCard({
         </span>
         <span className="hidden sm:inline text-gray-300">•</span>
         <span className="whitespace-nowrap">
-          <strong className="font-medium text-gray-700">Access:</strong>{" "}
-          {access}
+          <strong className="font-medium text-gray-700">Access:</strong> {access}
         </span>
       </div>
 
