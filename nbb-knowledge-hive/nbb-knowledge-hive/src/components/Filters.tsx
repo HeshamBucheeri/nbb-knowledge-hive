@@ -56,7 +56,7 @@ export default function Filters({ query, setQuery, allDocs }: Props) {
       aria-label="Filters"
       className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm"
     >
-      {/* Wider responsive grid; date range spans 2 cols on md+ */}
+      {/* Responsive grid; date range stacks on mobile */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
         {/* Department */}
         <label className="flex flex-col gap-1 text-sm">
@@ -105,8 +105,11 @@ export default function Filters({ query, setQuery, allDocs }: Props) {
           </select>
         </label>
 
-        {/* Date Range (spans 2 cols on md+; prevents overflow) */}
-        <div className="flex items-end gap-2 min-w-0 sm:col-span-1 md:col-span-2">
+        {/* Date Range:
+            - Mobile: stacks (grid-cols-1)
+            - sm+: two columns
+            - md+: spans 2 grid columns to give more room */}
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:col-span-2">
           <label className="flex w-full min-w-0 flex-col gap-1 text-sm">
             <span className="font-medium text-gray-700">From</span>
             <input
@@ -159,7 +162,6 @@ export default function Filters({ query, setQuery, allDocs }: Props) {
             );
           })}
 
-          {/* “More…” chip right after the tags (closer) */}
           {hasMore && (
             <button
               type="button"
