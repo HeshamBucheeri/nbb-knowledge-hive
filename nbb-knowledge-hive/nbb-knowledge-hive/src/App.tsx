@@ -23,7 +23,12 @@ export default function App() {
       <header className="sticky top-0 z-10 border-b bg-white/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
           <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-lg bg-nbb-red" aria-hidden="true" />
+            {/* Replace red box with NBB logo */}
+            <img
+              src="/nbb-logo.svg"        // or "/nbb-logo.png"
+              alt="NBB logo"
+              className="h-9 w-auto rounded-[8px] object-contain"
+            />
             <div>
               <h1 className="text-lg font-semibold text-nbb-teal">NBB Knowledge Hive</h1>
               <p className="text-xs text-gray-600">Bank-wide, searchable knowledge — demo (mock data, no integrations).</p>
