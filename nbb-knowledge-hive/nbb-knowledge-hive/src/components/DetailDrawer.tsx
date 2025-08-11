@@ -22,31 +22,27 @@ export default function DetailDrawer({ doc, onClose, related }: Props) {
   const { label: statusLabel, cls: statusCls } = getStatusBadge((doc as any).status);
   const access = (doc as any).access ?? (doc as any).accessLevel ?? "Public";
 
-  // --- Attachments logic (dedupe + preview first PDF only) ---
+  // --- Attachments: dedupe + preview first PDF only ---
   const rawAttachments = doc.attachments ?? [];
-
-  // De-duplicate by URL
-  const uniqueAttachments = Array.from(
-    new Map(rawAttachments.map((a) => [a.url, a])).values()
-  );
-
-  const pdfs = uniqueAttachments.filter((a) => (a.type ?? "pdf") === "pdf");
+  const uniqueAttachments = Array.from(new Map(rawAttachments.map(a => [a.url, a])).values());
+  const pdfs = uniqueAttachments.filter(a => (a.type ?? "pdf") === "pdf");
   const firstPdf = pdfs[0];
-
-  // Exclude the previewed PDF from the list (so we don't show it twice)
   const listAttachments = firstPdf
-    ? uniqueAttachments.filter((a) => a.url !== firstPdf.url)
+    ? uniqueAttachments.filter(a => a.url !== firstPdf.url)
     : uniqueAttachments;
 
   return (
     <div role="dialog" aria-modal="true" className="fixed inset-0 z-50">
+      {/* Backdrop */}
       <div className="absolute inset-0 bg-black/30" onClick={onClose} aria-label="Close overlay" />
+      {/* Panel */}
       <div className="absolute right-0 top-0 h-full w-full sm:w-[560px] overflow-y-auto bg-white shadow-xl">
         {/* Header */}
         <div className="sticky top-0 z-10 flex items-start justify-between gap-3 border-b bg-white px-4 py-3">
           <div className="flex min-w-0 items-start gap-2">
-            <h2 className="min-w-0 text-base font-semibold leading-6 text-nbb-teal">
-              <span className="line-clamp-2">{doc.title}</span>
+            {/* FULL title (no clamp) */}
+            <h2 className="min-w-0 break-words text-base font-semibold leading-6 text-nbb-teal">
+              {doc.title}
             </h2>
             <span className={`mt-0.5 shrink-0 rounded-full px-2 py-0.5 text-xs ${statusCls}`}>
               {statusLabel}
@@ -88,7 +84,7 @@ export default function DetailDrawer({ doc, onClose, related }: Props) {
               <p className="text-sm text-gray-600">No attachments for this document.</p>
             )}
 
-            {/* Inline preview for the first PDF only */}
+            {/* Inline preview for first PDF */}
             {firstPdf && (
               <div className="mb-3 overflow-hidden rounded-lg border">
                 <iframe title={firstPdf.name} src={firstPdf.url} className="h-72 w-full" />
@@ -102,7 +98,7 @@ export default function DetailDrawer({ doc, onClose, related }: Props) {
               </div>
             )}
 
-            {/* List the rest (non-preview) */}
+            {/* List the rest */}
             {listAttachments.length > 0 && (
               <ul className="space-y-2">
                 {listAttachments.map((a) => (
