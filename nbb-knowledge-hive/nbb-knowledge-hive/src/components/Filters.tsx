@@ -48,15 +48,16 @@ export default function Filters({ query, setQuery, allDocs }: Props) {
     () => Array.from(new Set(allDocs.flatMap((d) => d.tags))).sort(),
     [allDocs]
   );
-
   const displayedTags = showAllTags ? allTags : allTags.slice(0, VISIBLE_TAGS);
+  const hasMore = allTags.length > VISIBLE_TAGS;
 
   return (
     <section
       aria-label="Filters"
       className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm"
     >
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-4">
+      {/* Wider responsive grid; date range spans 2 cols on md+ */}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
         {/* Department */}
         <label className="flex flex-col gap-1 text-sm">
           <span className="font-medium text-gray-700">Department</span>
@@ -82,12 +83,7 @@ export default function Filters({ query, setQuery, allDocs }: Props) {
           <select
             className="rounded-md border border-gray-300 bg-white px-2 py-1.5 text-sm"
             value={query.type ?? "Any"}
-            onChange={(e) =>
-              setQuery({
-                ...query,
-                type: e.target.value as any, // "Any" or Doc["type"]
-              })
-            }
+            onChange={(e) => setQuery({ ...query, type: e.target.value as any })}
           >
             {types.map((t) => (
               <option key={t}>{t}</option>
@@ -101,12 +97,7 @@ export default function Filters({ query, setQuery, allDocs }: Props) {
           <select
             className="rounded-md border border-gray-300 bg-white px-2 py-1.5 text-sm"
             value={query.access ?? "Any"}
-            onChange={(e) =>
-              setQuery({
-                ...query,
-                access: e.target.value as any, // "Any" | Access
-              })
-            }
+            onChange={(e) => setQuery({ ...query, access: e.target.value as any })}
           >
             {accessLevels.map((a) => (
               <option key={a}>{a}</option>
@@ -114,22 +105,22 @@ export default function Filters({ query, setQuery, allDocs }: Props) {
           </select>
         </label>
 
-        {/* Date Range */}
-        <div className="flex items-end gap-2">
-          <label className="flex flex-col gap-1 text-sm w-full">
+        {/* Date Range (spans 2 cols on md+; prevents overflow) */}
+        <div className="flex items-end gap-2 min-w-0 sm:col-span-1 md:col-span-2">
+          <label className="flex w-full min-w-0 flex-col gap-1 text-sm">
             <span className="font-medium text-gray-700">From</span>
             <input
               type="date"
-              className="w-full rounded-md border border-gray-300 bg-white px-2 py-1.5 text-sm"
+              className="w-full min-w-0 rounded-md border border-gray-300 bg-white px-2 py-1.5 text-sm"
               value={query.from ?? ""}
               onChange={(e) => setQuery({ ...query, from: e.target.value || undefined })}
             />
           </label>
-          <label className="flex flex-col gap-1 text-sm w-full">
+          <label className="flex w-full min-w-0 flex-col gap-1 text-sm">
             <span className="font-medium text-gray-700">To</span>
             <input
               type="date"
-              className="w-full rounded-md border border-gray-300 bg-white px-2 py-1.5 text-sm"
+              className="w-full min-w-0 rounded-md border border-gray-300 bg-white px-2 py-1.5 text-sm"
               value={query.to ?? ""}
               onChange={(e) => setQuery({ ...query, to: e.target.value || undefined })}
             />
@@ -137,24 +128,10 @@ export default function Filters({ query, setQuery, allDocs }: Props) {
         </div>
       </div>
 
-      {/* Tags row */}
+      {/* Tags */}
       <div className="mt-3">
-        <div className="mb-1 flex items-center justify-between">
-          <span className="text-sm font-medium text-gray-700">Tags</span>
-          {allTags.length > VISIBLE_TAGS && (
-            <button
-              type="button"
-              className="text-xs text-nbb-teal underline underline-offset-2 hover:no-underline"
-              onClick={() => setShowAllTags((v) => !v)}
-              aria-expanded={showAllTags}
-              aria-controls="tag-cloud"
-            >
-              {showAllTags ? "Less…" : "More…"}
-            </button>
-          )}
-        </div>
-
-        <div id="tag-cloud" className="flex flex-wrap gap-2">
+        <span className="text-sm font-medium text-gray-700">Tags</span>
+        <div id="tag-cloud" className="mt-1 flex flex-wrap gap-2">
           {displayedTags.map((tag) => {
             const active = (query.tags ?? []).some(
               (t) => t.toLowerCase() === tag.toLowerCase()
@@ -181,6 +158,20 @@ export default function Filters({ query, setQuery, allDocs }: Props) {
               </button>
             );
           })}
+
+          {/* “More…” chip right after the tags (closer) */}
+          {hasMore && (
+            <button
+              type="button"
+              className="rounded-full border border-dashed px-3 py-1 text-xs text-nbb-teal hover:bg-nbb-teal/5"
+              onClick={() => setShowAllTags((v) => !v)}
+              aria-expanded={showAllTags}
+              aria-controls="tag-cloud"
+              title={showAllTags ? "Show fewer tags" : "Show more tags"}
+            >
+              {showAllTags ? "Less…" : `More… (${allTags.length - VISIBLE_TAGS})`}
+            </button>
+          )}
         </div>
       </div>
     </section>
