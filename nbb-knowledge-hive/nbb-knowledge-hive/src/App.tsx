@@ -67,19 +67,8 @@ export default function App() {
 
         {/* Results */}
         <section aria-label="Results" className="space-y-3">
-          <div className="flex items-center justify-between text-sm text-gray-600">
+          <div className="flex items-center justify-start text-sm text-gray-600">
             <span>{results.length} result{results.length !== 1 ? "s" : ""}</span>
-            <details>
-              <summary className="cursor-pointer text-nbb-teal">About this demo</summary>
-              <div className="mt-2 max-w-prose text-gray-600">
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>Local mock data simulates documents, access levels, and cross-references.</li>
-                  <li>Client-side search ranking: title &gt; tags &gt; summary &gt; content.</li>
-                  <li>Bookmarks persist to your browser only.</li>
-                  <li>Comments are illustrative only (not persisted).</li>
-                </ul>
-              </div>
-            </details>
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
