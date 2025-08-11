@@ -72,7 +72,7 @@ export const MOCK_DOCS: (Doc & { status?: string })[] = [
   {
     id: "H-005",
     title: "SOC Pilot Notes – Week 1 Results",
-    summary: "Alert queue reduced by 14% using prioritized routing; analyst satisfaction up modestly.",
+    summary: "Week 1 pilot notes.",
     department: "Cybersecurity",
     type: "Note",
     date: "2024-12-02",
@@ -174,7 +174,7 @@ export const MOCK_DOCS: (Doc & { status?: string })[] = [
   {
     id: "H-011",
     title: "Electronic Signatures Memo May 2025",
-    summary: "emo on approvals for E-signatures as of May 2025.",
+    summary: "Memo on approvals for E-signatures as of May 2025.",
     department: "Legal",
     type: "Report",
     date: "2025-07-12",
