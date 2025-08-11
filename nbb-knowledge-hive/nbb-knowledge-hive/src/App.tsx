@@ -56,8 +56,8 @@ export default function App() {
             <div className="relative w-full">
               <input
                 id="search"
-                placeholder="Search: e.g., cybersecurity R&D efficiency hypothesis"
-                className="w-full rounded-full border border-gray-300 bg-white p-3 pl-10 shadow-sm placeholder:text-gray-400"
+                aria-label="Search"
+                className="w-full rounded-full border border-gray-300 bg-white p-3 pl-10 shadow-sm"
                 value={query.text}
                 onChange={(e) => setQuery({ ...query, text: e.target.value })}
               />
