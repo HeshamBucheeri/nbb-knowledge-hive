@@ -9,13 +9,21 @@ export default function App() {
   const [query, setQuery] = React.useState<Query>({ text: "", type: "Any", access: "Any" });
   const [openDoc, setOpenDoc] = React.useState<Doc | null>(null);
   const [bookmarks, setBookmarks] = React.useState<string[]>(() => {
-    try { return JSON.parse(localStorage.getItem("nbb:bookmarks") || "[]"); } catch { return []; }
+    try {
+      return JSON.parse(localStorage.getItem("nbb:bookmarks") || "[]");
+    } catch {
+      return [];
+    }
   });
-  React.useEffect(() => { localStorage.setItem("nbb:bookmarks", JSON.stringify(bookmarks)); }, [bookmarks]);
+  React.useEffect(() => {
+    localStorage.setItem("nbb:bookmarks", JSON.stringify(bookmarks));
+  }, [bookmarks]);
 
   const results = filterDocs(MOCK_DOCS, query);
-  const onBookmark = (id: string) => setBookmarks(b => (b.includes(id) ? b.filter(x => x !== id) : [...b, id]));
-  const related = (doc: Doc | null) => (doc ? MOCK_DOCS.filter(d => doc.relatedIds.includes(d.id)) : []);
+  const onBookmark = (id: string) =>
+    setBookmarks((b) => (b.includes(id) ? b.filter((x) => x !== id) : [...b, id]));
+  const related = (doc: Doc | null) =>
+    doc ? MOCK_DOCS.filter((d) => doc.relatedIds.includes(d.id)) : [];
 
   return (
     <div className="min-h-screen">
@@ -23,15 +31,13 @@ export default function App() {
       <header className="sticky top-0 z-10 border-b bg-white/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
           <div className="flex items-center gap-3">
-            {/* Replace red box with NBB logo */}
-            <img
-              src="/nbb-logo.svg"        // or "/nbb-logo.png"
-              alt="NBB logo"
-              className="h-9 w-auto rounded-[8px] object-contain"
-            />
+            {/* NBB logo from /public/logo.svg */}
+            <img src="/logo.svg" alt="NBB" className="h-9 w-auto object-contain" />
             <div>
               <h1 className="text-lg font-semibold text-nbb-teal">NBB Knowledge Hive</h1>
-              <p className="text-xs text-gray-600">Bank-wide, searchable knowledge — demo (mock data, no integrations).</p>
+              <p className="text-xs text-gray-600">
+                Bank-wide, searchable knowledge — demo (mock data, no integrations).
+              </p>
             </div>
           </div>
           <button className="hidden sm:inline-flex items-center rounded-full border border-gray-300 px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-50">
@@ -43,7 +49,9 @@ export default function App() {
       <main className="mx-auto max-w-6xl space-y-6 px-4 py-6">
         {/* Search */}
         <section aria-label="Search">
-          <label htmlFor="search" className="sr-only">Search</label>
+          <label htmlFor="search" className="sr-only">
+            Search
+          </label>
           <div className="flex items-center gap-2">
             <div className="relative w-full">
               <input
@@ -51,7 +59,7 @@ export default function App() {
                 placeholder="Search: e.g., cybersecurity R&D efficiency hypothesis"
                 className="w-full rounded-full border border-gray-300 bg-white p-3 pl-10 shadow-sm placeholder:text-gray-400"
                 value={query.text}
-                onChange={e => setQuery({ ...query, text: e.target.value })}
+                onChange={(e) => setQuery({ ...query, text: e.target.value })}
               />
               <span className="pointer-events-none absolute left-3 top-2.5 text-gray-400">🔎</span>
             </div>
@@ -73,11 +81,13 @@ export default function App() {
         {/* Results */}
         <section aria-label="Results" className="space-y-3">
           <div className="flex items-center justify-start text-sm text-gray-600">
-            <span>{results.length} result{results.length !== 1 ? "s" : ""}</span>
+            <span>
+              {results.length} result{results.length !== 1 ? "s" : ""}
+            </span>
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {results.map(doc => (
+            {results.map((doc) => (
               <DocumentCard
                 key={doc.id}
                 doc={doc}
@@ -93,11 +103,13 @@ export default function App() {
         <section aria-label="Bookmarks" className="mt-8">
           <h2 className="mb-2 text-base font-semibold text-nbb-teal">Your bookmarks</h2>
           {bookmarks.length === 0 ? (
-            <p className="text-sm text-gray-600">No bookmarks yet. Use ☆ on any card to save it.</p>
+            <p className="text-sm text-gray-600">
+              No bookmarks yet. Use ☆ on any card to save it.
+            </p>
           ) : (
             <ul className="list-disc space-y-1 pl-5 text-sm">
-              {bookmarks.map(id => {
-                const d = MOCK_DOCS.find(x => x.id === id);
+              {bookmarks.map((id) => {
+                const d = MOCK_DOCS.find((x) => x.id === id);
                 if (!d) return null;
                 return (
                   <li key={id}>
