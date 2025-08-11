@@ -55,7 +55,7 @@ export const MOCK_DOCS: (Doc & { status?: string })[] = [
   {
     id: "H-004",
     title: "Cybersecurity R&D: Efficiency Hypothesis v2",
-    summary: "Auto-prioritize vulnerabilities by asset criticality and exploit telemetry to reduce MTTR.",
+    summary: "Cyber Security Hypothesis v2.",
     department: "Cybersecurity",
     type: "Research",
     date: "2024-11-18",
